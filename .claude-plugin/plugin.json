@@ -1,6 +1,6 @@
 {
   "name": "rdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Personal development workflow for Acuity PPM: structured task execution with plan files, quality checklists for Rails/Hasura/TypeScript/React, code review process, and specialized agents.",
   "author": {
     "name": "rdk"
@@ -14,27 +14,7 @@
     "code-review",
     "acuity"
   ],
-  "commands": {
-    "plan": "commands/plan.md",
-    "execute": "commands/execute.md",
-    "review": "commands/review.md",
-    "resume": "commands/resume.md",
-    "help": "commands/help.md"
-  },
-  "skills": {
-    "task-workflow": "skills/task-workflow/SKILL.md",
-    "rails-specialist": "skills/rails-specialist/SKILL.md",
-    "hasura-specialist": "skills/hasura-specialist/SKILL.md",
-    "typescript-react": "skills/typescript-react/SKILL.md",
-    "quality-checklists": "skills/quality-checklists/SKILL.md",
-    "code-review": "skills/code-review/SKILL.md"
-  },
-  "agents": {
-    "architect": "agents/architect.md",
-    "code-reviewer": "agents/code-reviewer.md",
-    "rails-researcher": "agents/rails-researcher.md",
-    "hasura-researcher": "agents/hasura-researcher.md",
-    "typescript-deriver": "agents/typescript-deriver.md",
-    "react-planner": "agents/react-planner.md"
-  }
+  "commands": "./commands/",
+  "agents": "./agents/",
+  "skills": "./skills/"
 }
