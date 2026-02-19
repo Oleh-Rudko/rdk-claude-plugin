@@ -1,0 +1,17 @@
+{
+  "name": "rdk-marketplace",
+  "owner": { "name": "rdk" },
+  "plugins": [
+    {
+      "name": "rdk",
+      "source": {
+        "source": "github",
+        "repo": "Oleh-Rudko/rdk-claude-plugin",
+        "ref": "main"
+      },
+      "description": "Acuity PPM development workflow",
+      "version": "1.0.0",
+      "author": { "name": "rdk" }
+    }
+  ]
+}
