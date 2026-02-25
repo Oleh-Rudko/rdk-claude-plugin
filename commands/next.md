@@ -1,5 +1,5 @@
 ---
-name: resume
+name: next
 description: Resume work after compact or new session
 ---
 

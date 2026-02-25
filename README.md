@@ -9,7 +9,7 @@ to avoid compact. Each phase = isolated subagent, result in a file.
 /rdk:plan → Phase 1-4 (Planning)
 /rdk:execute → Phase 5 (Execution)
 /rdk:review → Phase 6-7 (Review)
-/rdk:resume → Compact recovery
+/rdk:next → Compact recovery
 ```
 
 ### Flow
@@ -88,7 +88,7 @@ docs/plans/[YYYY-MM-DD]-[slug]/
 | `/rdk:plan [description]` | Start planning (Phase 1-4) |
 | `/rdk:execute [story]` | Execute tasks (Phase 5) |
 | `/rdk:review` | Code review + final check (Phase 6-7) |
-| `/rdk:resume` | Restore context after compact |
+| `/rdk:next` | Restore context after compact |
 
 ## Modes
 

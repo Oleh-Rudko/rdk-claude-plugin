@@ -12,7 +12,7 @@ description: Show plugin overview, commands, and usage guide
 | `/rdk:plan [task]` | Start planning cycle: understand → research → plan → architect review |
 | `/rdk:execute` | Execute approved plan: story by story with quality checks |
 | `/rdk:review` | Code review + final senior check before commit |
-| `/rdk:resume` | Restore context after compact or new session |
+| `/rdk:next` | Restore context after compact or new session |
 | `/rdk:help` | This help page |
 
 ## Best Workflow
@@ -69,5 +69,5 @@ Claude proposes mode automatically. You can override.
 - **Quick question?** Just ask — no need for /rdk:plan for small things
 - **Bug fix?** `/rdk:plan fix X` — Claude will propose 🟢 Quick or 🟡 Medium
 - **New feature?** `/rdk:plan add Y` — full research cycle
-- **After compact?** `/rdk:resume` — restores where you left off
+- **After compact?** `/rdk:next` — restores where you left off
 - **Before commit?** `/rdk:review` — catches N+1, permissions, types issues
