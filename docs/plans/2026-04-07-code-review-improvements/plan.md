@@ -146,7 +146,7 @@ For **each** point below, we go through 5 phases. Nothing gets implemented until
 
 ---
 
-### #B. 🔧 Eliminate naming conflict with native `/review`
+### #B. ✅ Eliminate naming conflict with native `/review`
 
 **Why P0:** Daily user frustration. Cheap. Independent of other points.
 
@@ -864,58 +864,94 @@ Total: **14 points** (3 new + 11 from original 15)
 
 ## Next action when we resume
 
-**Current status:** #B is **mostly complete** in working-dir. Session 1
-did the plugin-side cleanup (Phases 1–3). Session 2 diagnosed the real
-source of the collision (root-level skill, not plugin), disabled that
-skill, and removed `name:` fields from plugin commands. The remaining
-work is publication (commit + push + marketplace install) and
-root-level cleanup.
+**Current status (as of end of Session 2, 2026-04-07):**
+- ✅ **#B is 100% DONE.** Plugin published to GitHub `main` at v1.0.2,
+  installed via marketplace, root-level duplicates deleted. Verified
+  clean state of `~/.claude/skills/` and `~/.claude/agents/`.
+- 📋 **#A is partially analyzed but not fixed.** Sessions 1+2 confirmed
+  the rdk plugin makes ZERO `gh pr comment` calls. The user's PR-write
+  frustration is about the Anthropic `code-review@claude-plugins-official`
+  plugin, not rdk. For the rdk plugin, #A becomes a defensive measure:
+  document "this plugin never writes to PRs" in README, in agent prompts,
+  and possibly restrict the Bash tool whitelist for the code-reviewer
+  agent.
+- 📋 **#C not started.** Biggest UX change. Replaces the entire output
+  format with Critical/High focus + QA test instructions.
+- 📋 11 other points (#1–#15 minus the removed ones) untouched.
 
 ### How to resume
 
-**Step 1** — You can resume in any Claude Code session. If the plugin
-repo is not yet pushed to GitHub, start with `--plugin-dir` so the
-working-dir changes are active:
+**Step 1** — Start a fresh Claude Code session in any project, **WITHOUT**
+`--plugin-dir`. The plugin now loads from marketplace install:
 
 ```bash
 cd ~/Work/acuity_org/acuity
-claude --plugin-dir ~/Work/rdk-claude-plugin
+claude
 ```
 
-If the plugin is already published and reinstalled from marketplace,
-you no longer need `--plugin-dir`.
+**Step 2** — In the new session, paste this exact prompt:
 
-**Step 2** — In the new session, say:
-> "Read ~/Work/rdk-claude-plugin/docs/plans/2026-04-07-code-review-improvements/plan.md. Continue from #B Step 5b (commit + push)."
+```
+Прочитай ~/Work/rdk-claude-plugin/docs/plans/2026-04-07-code-review-improvements/plan.md.
+#B повністю завершений (Sessions 1+2). Переходь до #A — Block all GitHub
+PR writes from the plugin.
+
+Контекст для #A: rdk плагін НЕ робить gh pr comment (Sessions 1+2 це
+підтвердили — zero matches). Реальний винуватий — Anthropic
+code-review@claude-plugins-official плагін. Тому #A для rdk плагіна — це
+defensive measure: документально зафіксувати "цей плагін НІКОЛИ не пише в
+PR" у README, у agent prompts (особливо code-reviewer та architect), і
+можливо обмежити Bash whitelist у frontmatter code-reviewer агента щоб
+заблокувати gh pr comment / gh pr review / gh issue create / gh pr edit
+на рівні tool permissions.
+
+Працюй за п'ятьма фазами: Analysis → Design → Implementation → Testing →
+Verification. Питай мене перед кожною зміною коду. Один пункт за раз. Не
+комічуй і не пушай без явного дозволу.
+```
+
+**Step 3** — Sanity-перевірка перед початком #A (агент має зробити):
+- `claude plugin list` → переконатись що `rdk@rdk-marketplace ✔ enabled` v1.0.2
+- `ls ~/.claude/skills/` → має бути тільки `ai-chatbot/`
+- `ls ~/.claude/agents/` → має бути тільки `workflow-companion.md`
+- Якщо все ок — починати #A Phase 1 (Analysis)
 
 ### Session 1 summary (for quick reference)
 
-Files changed in the plugin (all in working dir, none committed yet):
+Files changed in the plugin (committed in `6460efd`):
 - `agents/code-reviewer.md`, `agents/architect.md`, `agents/rails-researcher.md`,
   `agents/hasura-researcher.md`, `agents/typescript-deriver.md`,
   `agents/react-planner.md` — "inherit language" instruction
 - `skills/code-review/` — **deleted** (was wrapper around code-reviewer agent)
 - `README.md`, `commands/help.md` — removed code-review skill row from tables
-- `docs/plans/2026-04-07-code-review-improvements/plan.md` — translated
-  Ukrainian quotes to English, updated #B section with Session 1 discoveries,
-  updated Next action section
 - `DEV.md` — **new file** documenting `--plugin-dir` workflow
 
 ### Session 2 summary (for quick reference)
 
-In working-dir plugin:
+In working-dir plugin (committed in `6460efd` on `main`):
 - `commands/execute.md`, `help.md`, `next.md`, `plan.md`, `review.md` —
-  removed `name:` frontmatter field (cosmetic, matches Anthropic plugin
-  style)
+  removed `name:` frontmatter field (matches Anthropic plugin style)
+- `.gitignore` — new, excludes `.claude/` personal dev settings
 - `docs/plans/2026-04-07-code-review-improvements/plan.md` — appended
-  Session 2 discoveries and updated remaining-steps section
+  Session 1 + Session 2 discoveries, updated #B status to ✅ DONE
 
-Outside the plugin (in `~/.claude/`, reversible):
-- `~/.claude/skills/code-review/` renamed to
-  `code-review.backup-2026-04-07/`
-- Inside that backup folder, `SKILL.md` renamed to `SKILL.md.disabled`
-  so Claude Code no longer auto-discovers it
+Git workflow done in Session 2:
+- Branch `feature/english-refactor-session-1` → fast-forward merged into `main`
+- Pushed `main` to `origin/main` (commit `6460efd`)
+- `claude plugin marketplace update rdk-marketplace` — refreshed cache to v1.0.2
+- `claude plugin install rdk@rdk-marketplace` — installed, `enabledPlugins`
+  now contains `rdk@rdk-marketplace: true`
 
-Nothing in `~/.claude/agents/` was deleted. Marketplace cache untouched.
-Nothing committed to git yet — Session 1 + Session 2 changes sit as
-uncommitted working tree in the plugin repo.
+Root-level cleanup done in Session 2:
+- DELETED: `~/.claude/skills/code-review.backup-2026-04-07/`
+- DELETED: `~/.claude/skills/task-workflow/`
+- DELETED: `~/.claude/skills/rails-specialist/`
+- DELETED: `~/.claude/skills/typescript-react/`
+- DELETED: `~/.claude/agents/code-reviewer.md`
+- DELETED: `~/.claude/agents/architect.md`
+- KEPT (unique to root, NOT in plugin): `~/.claude/skills/ai-chatbot/`,
+  `~/.claude/agents/workflow-companion.md`
+
+Verified after deletion: `ls ~/.claude/skills/` → `ai-chatbot` only.
+`ls ~/.claude/agents/` → `workflow-companion.md` only. Plugin loads via
+marketplace install, no collisions.
