@@ -1,5 +1,4 @@
 ---
-name: execute
 description: Start executing an approved plan (Phase 5)
 ---
 

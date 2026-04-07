@@ -1,5 +1,4 @@
 ---
-name: help
 description: Show plugin overview, commands, and usage guide
 ---
 
@@ -51,7 +50,6 @@ Claude proposes mode automatically. You can override.
 | `hasura-specialist` | Working in hasura/ |
 | `typescript-react` | Working in client/ |
 | `quality-checklists` | After changes — review criteria per layer |
-| `code-review` | Before commit — delegates to code-reviewer agent |
 
 ## Agents (called by orchestrator)
 

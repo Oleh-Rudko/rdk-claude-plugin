@@ -1,5 +1,4 @@
 ---
-name: review
 description: Run code review (Phase 6) and final check (Phase 7)
 ---
 

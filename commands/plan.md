@@ -1,5 +1,4 @@
 ---
-name: plan
 description: Start full planning cycle for a task (Phase 1-4)
 ---
 

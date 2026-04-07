@@ -68,7 +68,6 @@ docs/plans/[YYYY-MM-DD]-[slug]/
 | rails-specialist | Working in rails_api/ | N+1, multi-tenant, RSpec, Blueprinter |
 | hasura-specialist | Working in hasura/ | Permissions, access_groups, relationships |
 | typescript-react | Working in client/ | No any, hooks rules, Apollo, Jest |
-| code-review | Before commit | Delegates to code-reviewer agent |
 
 ### Agents (subagents, called by orchestrator)
 

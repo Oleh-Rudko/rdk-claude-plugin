@@ -1,0 +1,10 @@
+# Personal Claude Code dev settings, not shared
+.claude/
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
