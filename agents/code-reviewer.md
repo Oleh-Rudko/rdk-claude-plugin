@@ -483,11 +483,26 @@ Every Critical and High issue MUST have BOTH:
 | Severity | When to use | Where in file |
 |---|---|---|
 | 🔴 Critical | Quality checklist "Critical" sections (multi-tenant, auth, N+1, SQL injection, schema/permission filter, role check) OR failing automated test | Top, full block (For Dev + For QA) |
-| 🟠 High | Real bugs not in "Critical" tier: missing validation on user data, broken error handling, broken UX flow, accessibility issue | Top, full block (For Dev + For QA) |
+| 🟠 High | Observable bug in a **common user path** — missing validation on regular input, broken error handling on normal flow, broken UX flow a typical user hits, accessibility issue on a visible control | Top, full block (For Dev + For QA) |
 | 🟡 Medium | Quality checklist "Important" sections, missing tests, missing memoization, hardcoded strings | Bottom, one-liner |
 | 🟢 Low | Style, refactor opportunities, dead code, naming, unused imports | Bottom, one-liner |
 
 Quality checklist source: `.claude/rdk-plugin/skills/quality-checklists/SKILL.md`
+
+### Severity calibration (anti-inflation)
+
+Default to the **lower** severity when in doubt. High is reserved for bugs
+that will bite a regular user. Demote to Medium if any of the following apply:
+
+- **Edge case / rare condition** — requires network failure mid-action, concurrent writes, admin in 2+ companies, manually-crafted curl with modified payload, etc.
+- **Defense-in-depth** — another layer already blocks it (DB constraint, Rails strong params elsewhere, existing Hasura permission). Issue is "we should also guard here", not "user sees a bug".
+- **Race condition / partial-failure only** — bug manifests only on timeout, retry storm, or lost request. Not on a clean happy path.
+- **Theoretical vulnerability** — attack vector exists but requires nonstandard role combination, physical access, or would be caught by audit log anyway.
+- **Consistency with legacy** — same pattern is used in nearby code that ships today without complaints. Flag as Medium + question, not High.
+
+High is for: reader sees 403 on normal action, form submit crashes, data visibly wrong, common button broken. If you cannot describe a 2-minute QA reproduction that a typical user could perform — it is not High.
+
+If you mark something 🟠 High, your QA "Steps to reproduce" MUST NOT require: DevTools payload editing, admin in multiple companies, artificial network throttling, or special role combinations. If the steps need any of those — it is Medium.
 
 ### Verdict logic
 

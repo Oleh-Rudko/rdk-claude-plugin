@@ -34,7 +34,25 @@ When calling the `code-reviewer` subagent, **explicitly state the mode** in the 
 
 4. **Phase 7: Final review.** Call the `architect` subagent for a senior-level final pass. The agent will write to `final-review.md` (or PR-mode equivalent) and verify the code review is complete and reasonable.
 
-5. **Show the final summary** in the chat: verdict, issue counts, and the path of the saved review file.
+5. **Show the final summary** in the chat in this exact shape:
+
+   ```
+   ✅ Review saved: docs/code-review/YYYY-MM-DD-<slug>.md
+
+   Verdict: <🔴/🟡/🟢> (<N> Critical, <N> High, <N> Medium, <N> Low)
+
+   🔴 Critical:
+   - C1. <title> — `<file>:<line>` → QA: open review file, section "C1 → 🧪 For QA"
+
+   🟠 High:
+   - H1. <title> — `<file>:<line>` → QA: open review file, section "H1 → 🧪 For QA"
+   - H2. <title> — `<file>:<line>` → QA: open review file, section "H2 → 🧪 For QA"
+
+   ▶ Next step: open the review file and hand it to QA. Critical/High each
+     have full manual test steps in Ukrainian under their "🧪 For QA" block.
+   ```
+
+   If 0 Critical + 0 High → just print the verdict and file path. No issue list.
 
 ## Examples
 
