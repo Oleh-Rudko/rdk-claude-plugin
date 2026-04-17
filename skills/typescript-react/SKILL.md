@@ -6,12 +6,19 @@ description: >
   REST hooks, snake_case from Hasura, Permission hooks, AG Grid + MUI7, Redux + Immutable.js.
 ---
 
-# TypeScript/React Specialist — Acuity PPM
+# TypeScript/React Specialist — Acuity PPM (Overlay)
 
 React 18, TypeScript, Apollo Client 3 (GraphQL → Hasura), custom REST hooks (→ Rails API),
 Redux + Immutable.js, MUI 7 (migration in progress from v5), AG Grid, Bryntum Gantt 7,
 Tiptap 3 (rich text editor), Formik (adopting), Zod (validation), moment.js (dates),
 flag (feature flags), React Router 5, Jest + RTL.
+
+> **This is the Acuity overlay.** Universal React 18 + TS patterns (hook design, TS rules,
+> component structure, forms with Formik + Zod, Jest + RTL, accessibility) live in the
+> companion skill `frontend-core`. Read that first; this file adds Acuity-specific
+> conventions (snake_case, cents, enums as numbers, `serverHooksForGraphqlTS`) on top.
+>
+> Locate via: `Glob: **/rdk-claude-plugin/skills/frontend-core/SKILL.md`
 
 ---
 

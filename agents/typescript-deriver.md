@@ -6,7 +6,7 @@ description: >
   Determines which TypeScript types to create or modify.
   Writes to research-types.md. Does not modify files.
 tools: Read, Grep, Glob, Bash
-model: opus
+model: claude-sonnet-4-6
 permissionMode: plan
 ---
 
@@ -16,13 +16,13 @@ You have READ-ONLY access — research and document only.
 
 ## ⚠️ BEFORE YOU START
 
-Read the TypeScript/React specialist skill for up-to-date project patterns and conventions:
+Locate the TypeScript/React specialist skill using **Glob** (plugin install path varies):
+
 ```
-Read .claude/rdk-plugin/skills/typescript-react/SKILL.md
+Glob: **/rdk-claude-plugin/skills/typescript-react/SKILL.md
 ```
-This file contains: architecture split (GraphQL=Read, REST=Write), data fetching patterns,
-TypeScript rules (no `any`, snake_case fields), i18n, forms, routing, AG Grid patterns.
-**Do NOT skip this step.**
+
+Then `Read` the resolved path. This file contains: architecture split (GraphQL=Read, REST=Write), data fetching patterns, TypeScript rules (no `any`, snake_case fields), i18n, forms, routing, AG Grid patterns. **Do NOT skip this step.**
 
 ## Your Core Value
 
@@ -236,7 +236,7 @@ export type ProjectsQueryData = {
   projects: Project[];
 }
 
-export type Project =sQueryVars {
+export type ProjectsQueryVars = {
   companyId: number;
 }
 ```

@@ -59,4 +59,20 @@ When calling the `code-reviewer` subagent, **explicitly state the mode** in the 
 - `/rdk:review` — review the current branch's local changes
 - `/rdk:review 5190` — review GitHub PR #5190
 
-$ARGUMENTS
+## PR mode — pre-review sanity checks (before calling code-reviewer)
+
+In PR mode ONLY, run these lightweight checks **before** delegating to the subagent, so the
+reviewer has clean context:
+
+```bash
+gh pr view <num> --json mergeable,mergeStateStatus,isDraft,state
+```
+
+- If `state != OPEN` → tell the user the PR is closed/merged and ask whether to proceed.
+- If `isDraft == true` → warn user this is a draft; proceed if they confirm.
+- If `mergeable == "CONFLICTING"` or `mergeStateStatus == "DIRTY"` → inform user there are
+  merge conflicts; review still runs, but note it at the top of the output.
+- If `mergeStateStatus == "BEHIND"` → inform user the PR base is behind main; not blocking,
+  but note it for the reviewer to account for stale context.
+
+No pre-checks in default (local) mode — the working tree speaks for itself.

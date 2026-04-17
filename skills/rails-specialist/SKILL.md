@@ -7,9 +7,16 @@ description: >
   multi-tenant through Company → Organization → Portfolio/ProposalPortfolio.
 ---
 
-# Rails Specialist — Acuity PPM
+# Rails Specialist — Acuity PPM (Overlay)
 
 Rails 7.2 API-only, PostgreSQL, Blueprinter, Lambdakiq (AWS Lambda + SQS), RSpec + FactoryBot.
+
+> **This is the Acuity overlay.** Universal Rails patterns (Zeitwerk naming, migrations,
+> `audited` gem, N+1 prevention, Blueprinter basics, RSpec, basic controllers, service objects)
+> live in the companion skill `rails-core`. Read that first; this file adds Acuity-specific
+> architecture on top.
+>
+> Locate via: `Glob: **/rdk-claude-plugin/skills/rails-core/SKILL.md`
 
 ---
 

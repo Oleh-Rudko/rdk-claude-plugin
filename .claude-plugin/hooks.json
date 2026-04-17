@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh -c 'if [ -d docs/plans ]; then latest=$(find docs/plans -maxdepth 2 -name plan.md -mtime -14 2>/dev/null | sort | tail -1); if [ -n \"$latest\" ]; then echo \"[rdk-plugin] Active plan found: $latest — read it to resume work\"; fi; fi'"
+          }
+        ]
+      }
+    ]
+  }
+}

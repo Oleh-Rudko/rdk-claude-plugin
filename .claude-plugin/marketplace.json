@@ -10,7 +10,7 @@
         "ref": "main"
       },
       "description": "Acuity PPM development workflow",
-      "version": "1.0.3",
+      "version": "1.0.7",
       "author": { "name": "rdk" }
     }
   ]

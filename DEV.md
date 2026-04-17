@@ -100,7 +100,9 @@ rdk-claude-plugin/
 │   ├── plan.md
 │   ├── execute.md
 │   ├── review.md
-│   ├── next.md
+│   ├── ui-test.md
+│   ├── test-write.md
+│   ├── qa-test.md
 │   └── help.md
 ├── skills/                  ← knowledge bases auto-loaded when relevant
 │   ├── task-workflow/

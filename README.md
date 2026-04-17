@@ -13,7 +13,6 @@ to avoid compact. Each phase = isolated subagent, result in a file.
 /rdk:plan → Phase 1-4 (Planning)
 /rdk:execute → Phase 5 (Execution)
 /rdk:review → Phase 6-7 (Review)
-/rdk:next → Compact recovery
 ```
 
 ### Flow
@@ -69,20 +68,28 @@ docs/plans/[YYYY-MM-DD]-[slug]/
 |-------|------|------|
 | task-workflow | Any task | Orchestrator: coordinates phases and subagents |
 | quality-checklists | After changes | Quality checklists for Rails/Hasura/TS/React |
-| rails-specialist | Working in rails_api/ | N+1, multi-tenant, RSpec, Blueprinter |
-| hasura-specialist | Working in hasura/ | Permissions, access_groups, relationships |
-| typescript-react | Working in client/ | No any, hooks rules, Apollo, Jest |
+| rails-core | Universal Rails | Zeitwerk, migrations, RSpec, Blueprinter basics, `audited`, N+1 |
+| rails-specialist | Working in rails_api/ (Acuity overlay) | ApiController + Secured, access_groups, Lambdakiq, multi-region |
+| hasura-core | Universal Hasura | Metadata, relationships, permissions, computed fields, functions, CLI |
+| hasura-specialist | Working in hasura/ (Acuity overlay) | access_groups chains, portfolio/proposal_portfolio types |
+| frontend-core | Universal React 18 + TS | Hook design, TS rules, forms (Formik + Zod), Jest + RTL, a11y |
+| typescript-react | Working in client/ (Acuity overlay) | snake_case, cents, enums-as-numbers, serverHooksForGraphqlTS |
 
 ### Agents (subagents, called by orchestrator)
 
-| Agent | Phase | What it does | Output |
-|-------|-------|-------------|--------|
-| rails-researcher | 2a | Researches rails_api/ | research-rails.md |
-| hasura-researcher | 2b | Researches hasura/metadata/ | research-hasura.md |
-| typescript-deriver | 2c | Derives TS types from backend | research-types.md |
-| react-planner | 2d | Plans React implementation | research-react.md |
-| architect | 4, 7 | Senior review of plan and final check | senior-review.md, final-review.md |
-| code-reviewer | 6 | Code review with quality checks | code-review.md |
+| Agent | Phase | Model | What it does | Output |
+|-------|-------|-------|-------------|--------|
+| rails-researcher | 2a | Sonnet 4.6 | Researches rails_api/ | research-rails.md |
+| hasura-researcher | 2b | Sonnet 4.6 | Researches hasura/metadata/ | research-hasura.md |
+| typescript-deriver | 2c | Sonnet 4.6 | Derives TS types from backend | research-types.md |
+| react-planner | 2d | Sonnet 4.6 | Plans React implementation | research-react.md |
+| architect | 4, 7 | Opus 4.7 | Senior review of plan and final check | senior-review.md, final-review.md |
+| code-reviewer | 6 | Opus 4.7 | Code review with quality checks | code-review.md |
+| ui-tester | optional | Sonnet 4.6 | Browser smoke tests via Playwright MCP | ui-test-report.md |
+| test-writer | optional | Sonnet 4.6 | Generates missing RSpec / Jest specs | — (writes tests directly) |
+| qa-test-planner | optional | Sonnet 4.6 | Generates manual QA test plan in Ukrainian from diff | docs/qa-tests/[date]-[slug].md |
+
+**Model tier strategy:** research-oriented agents use Sonnet 4.6 (fast, cheap, sufficient for code reading and planning). Architect + code-reviewer use Opus 4.7 for critical reasoning (multi-tenant audit, edge cases, architectural tradeoffs).
 
 ### Commands
 
@@ -91,7 +98,10 @@ docs/plans/[YYYY-MM-DD]-[slug]/
 | `/rdk:plan [description]` | Start planning (Phase 1-4) |
 | `/rdk:execute [story]` | Execute tasks (Phase 5) |
 | `/rdk:review [PR number]` | Code review + final check (Phase 6-7). Default: local working tree. With PR number: review a GitHub pull request |
-| `/rdk:next` | Restore context after compact |
+| `/rdk:ui-test [feature]` | Run UI smoke tests in a real browser via Playwright MCP |
+| `/rdk:test-write [story]` | Generate missing RSpec + Jest tests for recent changes |
+| `/rdk:qa-test [PR number]` | Generate a manual QA test plan in Ukrainian from diff or PR |
+| `/rdk:help` | Show plugin overview |
 
 ## Modes
 

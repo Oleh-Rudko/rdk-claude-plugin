@@ -11,7 +11,9 @@ description: Show plugin overview, commands, and usage guide
 | `/rdk:plan [task]` | Start planning cycle: understand → research → plan → architect review |
 | `/rdk:execute` | Execute approved plan: story by story with quality checks |
 | `/rdk:review` | Code review + final senior check before commit |
-| `/rdk:next` | Restore context after compact or new session |
+| `/rdk:ui-test [feature]` | Run UI smoke tests via Playwright MCP |
+| `/rdk:test-write [story]` | Generate missing RSpec + Jest tests |
+| `/rdk:qa-test [PR number]` | Manual QA test plan in Ukrainian from diff/PR |
 | `/rdk:help` | This help page |
 
 ## Best Workflow
@@ -53,19 +55,22 @@ Claude proposes mode automatically. You can override.
 
 ## Agents (called by orchestrator)
 
-| Agent | Phase | Output |
-|-------|-------|--------|
-| `rails-researcher` | 2a | research-rails.md |
-| `hasura-researcher` | 2b | research-hasura.md |
-| `typescript-deriver` | 2c | research-types.md |
-| `react-planner` | 2d | research-react.md |
-| `architect` | 4, 7 | senior-review.md, final-review.md |
-| `code-reviewer` | 6 | code-review.md |
+| Agent | Phase | Model | Output |
+|-------|-------|-------|--------|
+| `rails-researcher` | 2a | Sonnet 4.6 | research-rails.md |
+| `hasura-researcher` | 2b | Sonnet 4.6 | research-hasura.md |
+| `typescript-deriver` | 2c | Sonnet 4.6 | research-types.md |
+| `react-planner` | 2d | Sonnet 4.6 | research-react.md |
+| `architect` | 4, 7 | Opus 4.7 | senior-review.md, final-review.md |
+| `code-reviewer` | 6 | Opus 4.7 | code-review.md |
+| `ui-tester` | optional | Sonnet 4.6 | ui-test-report.md (Playwright browser tests) |
+| `test-writer` | optional | Sonnet 4.6 | writes missing RSpec / Jest tests |
+| `qa-test-planner` | optional | Sonnet 4.6 | docs/qa-tests/...md (manual QA plan UA) |
 
 ## Tips
 
 - **Quick question?** Just ask — no need for /rdk:plan for small things
 - **Bug fix?** `/rdk:plan fix X` — Claude will propose 🟢 Quick or 🟡 Medium
 - **New feature?** `/rdk:plan add Y` — full research cycle
-- **After compact?** `/rdk:next` — restores where you left off
 - **Before commit?** `/rdk:review` — catches N+1, permissions, types issues
+- **Before merge?** `/rdk:qa-test` — manual test plan for QA in Ukrainian

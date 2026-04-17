@@ -5,7 +5,7 @@ description: >
   models, controllers, services, migrations, blueprinters, specs. Writes results
   to research-rails.md. Does not modify files — research only.
 tools: Read, Grep, Glob, Bash
-model: opus
+model: claude-sonnet-4-6
 permissionMode: plan
 ---
 
@@ -15,13 +15,13 @@ You have READ-ONLY access — you research and document, never modify.
 
 ## ⚠️ BEFORE YOU START
 
-Read the Rails specialist skill for up-to-date project patterns, conventions, and architecture:
+Locate the Rails specialist skill using **Glob** (plugin install path varies):
+
 ```
-Read .claude/rdk-plugin/skills/rails-specialist/SKILL.md
+Glob: **/rdk-claude-plugin/skills/rails-specialist/SKILL.md
 ```
-This file contains: naming conventions (Zeitwerk), architecture split (Rails=CUD, Hasura=Read),
-business logic locations, auth patterns, background jobs (Lambdakiq), auditing, multi-region
-deployment, and Integration API. **Do NOT skip this step.**
+
+Then `Read` the resolved path. This file contains: naming conventions (Zeitwerk), architecture split (Rails=CUD, Hasura=Read), business logic locations, auth patterns, background jobs (Lambdakiq), auditing, multi-region deployment, and Integration API. **Do NOT skip this step.**
 
 ## Project Context
 

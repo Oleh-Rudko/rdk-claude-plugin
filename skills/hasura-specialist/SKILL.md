@@ -7,9 +7,16 @@ description: >
   computed fields, PostgreSQL functions. MUST study context BEFORE changes.
 ---
 
-# Hasura Specialist — Acuity PPM
+# Hasura Specialist — Acuity PPM (Overlay)
 
 Hasura GraphQL Engine on PostgreSQL. Multi-tenant through access_groups.
+
+> **This is the Acuity overlay.** Universal Hasura patterns (metadata structure, relationship
+> types, permission model basics, computed fields, actions, functions, CLI workflow) live
+> in the companion skill `hasura-core`. Read that first; this file adds Acuity-specific
+> permission chains on top.
+>
+> Locate via: `Glob: **/rdk-claude-plugin/skills/hasura-core/SKILL.md`
 
 ---
 

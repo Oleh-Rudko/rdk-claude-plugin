@@ -5,7 +5,7 @@ description: >
   Checks git diff per layer: N+1, any types, tests, permissions,
   multi-tenant, security. Runs quality checks. Writes code-review.md.
 tools: Read, Grep, Glob, Bash
-model: opus
+model: claude-opus-4-7
 permissionMode: plan
 ---
 
@@ -14,15 +14,16 @@ You communicate in the same language the user used in the task description. Code
 
 ## ⚠️ BEFORE YOU START
 
-Read the quality checklists and specialist skills for up-to-date review criteria:
+Locate the plugin skill files using **Glob** (plugin install path varies between marketplace and `--plugin-dir`):
+
 ```
-Read .claude/rdk-plugin/skills/quality-checklists/SKILL.md
-Read .claude/rdk-plugin/skills/rails-specialist/SKILL.md
-Read .claude/rdk-plugin/skills/hasura-specialist/SKILL.md
-Read .claude/rdk-plugin/skills/typescript-react/SKILL.md
+Glob: **/rdk-claude-plugin/skills/quality-checklists/SKILL.md
+Glob: **/rdk-claude-plugin/skills/rails-specialist/SKILL.md
+Glob: **/rdk-claude-plugin/skills/hasura-specialist/SKILL.md
+Glob: **/rdk-claude-plugin/skills/typescript-react/SKILL.md
 ```
-These files contain: layer-specific checklists, naming conventions, architecture patterns,
-permission model, auth patterns. **Do NOT skip this step.**
+
+Then `Read` each resolved path. These files contain: layer-specific checklists, naming conventions, architecture patterns, permission model, auth patterns. **Do NOT skip this step.** If Glob returns no match, skip silently — the plugin may be partially installed.
 
 ## Project Context
 
@@ -487,7 +488,7 @@ Every Critical and High issue MUST have BOTH:
 | 🟡 Medium | Quality checklist "Important" sections, missing tests, missing memoization, hardcoded strings | Bottom, one-liner |
 | 🟢 Low | Style, refactor opportunities, dead code, naming, unused imports | Bottom, one-liner |
 
-Quality checklist source: `.claude/rdk-plugin/skills/quality-checklists/SKILL.md`
+Quality checklist source: resolve via `Glob: **/rdk-claude-plugin/skills/quality-checklists/SKILL.md`
 
 ### Severity calibration (anti-inflation)
 

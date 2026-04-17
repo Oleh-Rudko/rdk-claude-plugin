@@ -345,7 +345,7 @@ Create `execution-log.md` and work through Stories:
 
 ```markdown
 ### ✅ Task 1.2.1: [name]
-**Timestamp:** HH:MM
+**Timestamp:** HH:MM (start) → HH:MM (done)   ← track both for duration
 **Done:**
 - [specific changes]
 
@@ -358,6 +358,43 @@ Create `execution-log.md` and work through Stories:
 **Open questions:**
 - [if something unclear for next tasks]
 ```
+
+### Observability (append at the end of execution-log.md)
+
+When the task is fully complete (after Phase 7), append a `## Metrics` section:
+
+```markdown
+## Metrics
+
+**Phase durations:**
+- Phase 1 (epic): ~5 min
+- Phase 2 (research): ~12 min (4 subagents)
+- Phase 3 (plan assembly): ~3 min
+- Phase 4 (senior plan review): ~4 min
+- Phase 5 (execution): ~75 min
+- Phase 6 (code review): ~6 min
+- Phase 7 (final review): ~3 min
+- **Total wall-clock: ~108 min**
+
+**Scope:**
+- Stories: 5/5 completed
+- Tasks: 22/22 completed
+- Files changed: 17 (+432 / -38)
+- Layers touched: Rails, Hasura, Frontend
+
+**Review output:**
+- Critical: 0
+- High: 1 (fixed before merge)
+- Medium: 4 (documented, deferred)
+- Low: 7 (documented)
+
+**Subagent calls:** rails-researcher, hasura-researcher, typescript-deriver,
+react-planner, architect (×2), code-reviewer
+```
+
+Metrics are approximate (wall-clock since start of task is enough — no need to time
+each subagent precisely). Purpose: identify bottlenecks across tasks over time
+(e.g. "research keeps taking 15+ min — consider caching repeat lookups").
 
 ### Execution Rules
 - Execute one Story at a time
@@ -429,7 +466,21 @@ If there are 🔴 Critical — fix and run code-reviewer again.
 After Phase 7:
 1. Update epic.md — Status: `✅ Done`
 2. Update plan.md — Status: `✅ Done`
-3. Give the human a summary:
+3. **Memory distillation (optional but recommended).** Scan epic.md, plan.md, senior-review.md, code-review.md, final-review.md for **non-obvious** learnings worth persisting across sessions:
+
+   - A project-specific pattern the team uses (not derivable from code) → `project` memory
+   - Feedback the user gave during the task (correction OR confirmation) → `feedback` memory
+   - External reference uncovered (dashboard URL, Linear project, Slack channel) → `reference` memory
+   - User preference learned (e.g. "prefers Formik over RHF here") → `user` memory
+
+   Do NOT save:
+   - What the code does (visible in the diff)
+   - Task-specific details that don't generalize
+   - Anything already in an existing memory file
+
+   If nothing clearly non-obvious emerged, **skip this step entirely** — noise in memory is costly.
+
+4. Give the human a summary:
 
 ```
 Task "[name]" completed.
@@ -439,6 +490,7 @@ Files changed: [count]
 Tests: ✅ RSpec passing, ✅ Jest passing
 Code review: ✅ No critical issues
 Final review: ✅ Approved
+Memory: [1 new entry | nothing worth saving]
 
 Documentation: docs/plans/[slug]/
 ```

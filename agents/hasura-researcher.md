@@ -5,7 +5,7 @@ description: >
   DB schema, table relationships, permissions per role, actions, functions.
   Writes results to research-hasura.md. Does not modify files.
 tools: Read, Grep, Glob, Bash
-model: opus
+model: claude-sonnet-4-6
 permissionMode: plan
 ---
 
@@ -15,14 +15,13 @@ You have READ-ONLY access — research and document only.
 
 ## ⚠️ BEFORE YOU START
 
-Read the Hasura specialist skill for up-to-date permission model, relationship patterns,
-and architecture:
+Locate the Hasura specialist skill using **Glob** (plugin install path varies):
+
 ```
-Read .claude/rdk-plugin/skills/hasura-specialist/SKILL.md
+Glob: **/rdk-claude-plugin/skills/hasura-specialist/SKILL.md
 ```
-This file contains: architecture split (Hasura=97% Read), single `user` role explanation,
-three permission chain patterns, relationship types (FK-based + manual_configuration),
-computed fields, actions, deployment model. **Do NOT skip this step.**
+
+Then `Read` the resolved path. This file contains: architecture split (Hasura=97% Read), single `user` role explanation, three permission chain patterns, relationship types (FK-based + manual_configuration), computed fields, actions, deployment model. **Do NOT skip this step.**
 
 ## Project Context
 

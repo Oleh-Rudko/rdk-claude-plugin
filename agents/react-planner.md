@@ -6,7 +6,7 @@ description: >
   Plans components, hooks, queries, state management.
   Writes to research-react.md. Does not modify files.
 tools: Read, Grep, Glob, Bash
-model: opus
+model: claude-sonnet-4-6
 permissionMode: plan
 ---
 
@@ -16,14 +16,13 @@ You have READ-ONLY access — research and plan only.
 
 ## ⚠️ BEFORE YOU START
 
-Read the TypeScript/React specialist skill for up-to-date project patterns and conventions:
+Locate the TypeScript/React specialist skill using **Glob** (plugin install path varies):
+
 ```
-Read .claude/rdk-plugin/skills/typescript-react/SKILL.md
+Glob: **/rdk-claude-plugin/skills/typescript-react/SKILL.md
 ```
-This file contains: architecture split (GraphQL=Read, REST=Write), data fetching patterns,
-TypeScript rules, i18n (react-i18next + useLanguage), forms (controlled components or Formik + Zod),
-routing (React Router v5, no lazy loading), AG Grid, MUI 7.
-**Do NOT skip this step.**
+
+Then `Read` the resolved path. This file contains: architecture split (GraphQL=Read, REST=Write), data fetching patterns, TypeScript rules, i18n (react-i18next + useLanguage), forms (controlled components or Formik + Zod), routing (React Router v5, no lazy loading), AG Grid, MUI 7. **Do NOT skip this step.**
 
 ## Project Context
 
